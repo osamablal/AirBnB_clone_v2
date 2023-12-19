@@ -13,6 +13,12 @@ from models.state import State
 from models.review import Review
 
 
+classes = {
+        'BaseModel': BaseModel, 'User': User, 'Place': Place,
+        'State': State, 'City': City, 'Amenity': Amenity,
+        'Review': Review
+    }
+
 class HBNBCommand(cmd.Cmd):
     """ Having the usage of HBNB console"""
 

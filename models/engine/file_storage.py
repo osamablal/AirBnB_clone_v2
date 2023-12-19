@@ -1,14 +1,7 @@
 #!/usr/bin/python3
 """The class of File-Storage."""
 import json
-import models
-
-
-classes = {"Amenity": models.amenity.Amenity, 
-           "BaseModel": models.base_model.BaseModel,
-           "City": models.city.City, "Place": models.place.Place,
-           "Review": models.review.Review, "State": models.state.State,
-           "User": models.user.User}
+import console
 
 
 class FileStorage:
@@ -24,11 +17,11 @@ class FileStorage:
         """
         fsss_objects = {}
         if cls:
-            if isinstance(cls) is str and cls in classes:
+            if isinstance(cls) is str and cls in console.classes:
                 for key, val in self.__objects.items():
                     if cls == key.split('.')[0]:
                         fsss_objects[key] = val
-            elif cls.__name__ in classes:
+            elif cls.__name__ in console.classes:
                 for key, val in self.__objects.items():
                     if cls.__name__ == key.split('.')[0]:
                         fsss_objects[key] = val
@@ -63,7 +56,7 @@ class FileStorage:
                 FileStorage.__objects = json.load(fd)
             for key, val in FileStorage.__objects.items():
                 class_name = val["__class__"]
-                class_name = classes[class_name]
+                class_name = console.classes[class_name]
                 FileStorage.__objects[key] = class_name(**val)
         except FileNotFoundError:
             pass

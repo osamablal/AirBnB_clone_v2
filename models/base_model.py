@@ -2,7 +2,6 @@
 """Formating a state class of all model in the hbnb. """
 import uuid
 from datetime import datetime
-from models.__init__ import storage
 from sqlalchemy import Column, String, DateTime
 from sqlalchemy.ext.declarative import declarative_base
 import models
@@ -42,8 +41,8 @@ class BaseModel:
     def save(self):
         """Renewing updated_at with actual time if instance changes"""
         self.updated_at = datetime.now()
-        storage.new(self)
-        storage.save()
+        models.storage.new(self)
+        models.storage.save()
 
     def to_dict(self):
         """Returnig instance to the dict form. """

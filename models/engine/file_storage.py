@@ -1,17 +1,12 @@
 #!/usr/bin/python3
 """The class of File-Storage."""
 import json
-from models.base_model import BaseModel
-from models.user import User
-from models.place import Place
-from models.state import State
-from models.city import City
-from models.amenity import Amenity
-from models.review import Review
+import models
 
 
-classes = {"Amenity": Amenity, "BaseModel": BaseModel, "City": City,
-           "Place": Place, "Review": Review, "State": State, "User": User}
+classes = {"Amenity": models.Amenity, "BaseModel": models.base_model.BaseModel,
+           "City": models.City, "Place": models.Place, "Review": models.Review,
+           "State": models.State, "User": models.User}
 
 
 class FileStorage:

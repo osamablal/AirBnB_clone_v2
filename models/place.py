@@ -4,9 +4,7 @@ from os import getenv
 from models.base_model import BaseModel, Base
 from sqlalchemy import Column, String, Integer, Float, ForeignKey, Table
 from sqlalchemy.orm import relationship
-from models import Review
-from models import storage
-from models import Amenity
+import models
 
 place_amenity = Table('place_amenity', Base.metadata,
                       Column('place_id', String(60),
@@ -46,7 +44,7 @@ class Place(BaseModel, Base):
             '''storage linking between place with review. '''
 
             review_list = []
-            review_dict = storage.all(Review)
+            review_dict = models.storage.all(models.Review)
             for review in review_dict.values():
                 if review.place_id == self.id:
                     review_list.append(review)
@@ -65,5 +63,5 @@ class Place(BaseModel, Base):
             Doing the append of the adding of a
             Amenity id to the amenity ides.
             '''
-            if isinstance(obj) is Amenity and obj.id not in self.amenity_ids:
+            if isinstance(obj) is models.Amenity and obj.id not in self.amenity_ids:
                 self.amenity_ids.append(obj.id)

@@ -5,7 +5,7 @@ import models
 import models.amenity
 
 
-classes = {"Amenity": models.Amenity, "BaseModel": models.base_model.BaseModel,
+classes = {"Amenity": models.amenity.Amenity, "BaseModel": models.base_model.BaseModel,
            "City": models.City, "Place": models.Place, "Review": models.Review,
            "State": models.State, "User": models.User}
 

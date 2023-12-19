@@ -3,8 +3,8 @@
 import cmd
 import sys
 import shlex
-from models.base_model import BaseModel
 from models.__init__ import storage
+from models.base_model import BaseModel
 from models.user import User
 from models.place import Place
 from models.amenity import Amenity

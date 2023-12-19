@@ -2,6 +2,7 @@
 """The class of File-Storage."""
 import json
 import models
+import models.amenity
 
 
 classes = {"Amenity": models.Amenity, "BaseModel": models.base_model.BaseModel,

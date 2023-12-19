@@ -2,10 +2,10 @@
 """Formating a state class of all model in the hbnb. """
 import uuid
 from datetime import datetime
+from models.__init__ import storage
 from sqlalchemy import Column, String, DateTime
 from sqlalchemy.ext.declarative import declarative_base
 import models
-from models.__init__ import storage
 
 Base = declarative_base()
 

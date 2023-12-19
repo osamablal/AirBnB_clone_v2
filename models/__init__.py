@@ -4,7 +4,8 @@ The modele gives an object to store as a type
 having the modele of the objects.
 """
 from os import getenv
-import models.engine
+import models.engine.file_storage
+import models.engine.db_storage
 
 if getenv('HBNB_TYPE_STORAGE') == 'db':
     storage = models.engine.db_storage.DBStorage()

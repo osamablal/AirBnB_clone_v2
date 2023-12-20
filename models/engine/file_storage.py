@@ -1,12 +1,7 @@
 #!/usr/bin/python3
 """The class of File-Storage."""
 import json
-import models
 
-
-classes = {"State": models.state.State, "City": models.city.City,
-           "User": models.user.User, "Place": models.place.Place,
-           "Review": models.review.Review, "Amenity": models.amenity.Amenity}
 
 class FileStorage:
     """
@@ -20,6 +15,19 @@ class FileStorage:
             Going back to the dictinary.
         """
         fsss_objects = {}
+        from models.base_model import BaseModel
+        from models.user import User
+        from models.place import Place
+        from models.state import State
+        from models.city import City
+        from models.amenity import Amenity
+        from models.review import Review
+
+        classes = {
+            'BaseModel': BaseModel, 'User': User, 'Place': Place,
+            'State': State, 'City': City, 'Amenity': Amenity,
+            'Review': Review
+        }
         if cls:
             if isinstance(cls) is str and cls in classes:
                 for key, val in self.__objects.items():
@@ -55,6 +63,19 @@ class FileStorage:
         """
             Deputting the JSON file to objects.
         """
+        from models.base_model import BaseModel
+        from models.user import User
+        from models.place import Place
+        from models.state import State
+        from models.city import City
+        from models.amenity import Amenity
+        from models.review import Review
+
+        classes = {
+            'BaseModel': BaseModel, 'User': User, 'Place': Place,
+            'State': State, 'City': City, 'Amenity': Amenity,
+            'Review': Review
+        }
         try:
             with open(FileStorage.__file_path, encoding="UTF8") as fd:
                 FileStorage.__objects = json.load(fd)

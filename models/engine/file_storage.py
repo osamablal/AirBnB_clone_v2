@@ -4,9 +4,9 @@ import json
 import models
 
 
-classes = {"State": models.State, "City": models.City,
-           "User": models.User, "Place": models.Place,
-           "Review": models.Review, "Amenity": models.Amenity}
+classes = {"State": models.state.State, "City": models.city.City,
+           "User": models.user.User, "Place": models.place.Place,
+           "Review": models.review.Review, "Amenity": models.amenity.Amenity}
 
 class FileStorage:
     """

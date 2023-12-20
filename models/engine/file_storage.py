@@ -29,7 +29,7 @@ class FileStorage:
             'Review': Review
         }
         if cls:
-            if isinstance(cls) is str and cls in classes:
+            if type(cls) is str and cls in classes:
                 for key, val in self.__objects.items():
                     if cls == key.split('.')[0]:
                         fs_objects[key] = val

@@ -3,13 +3,7 @@
 from os import getenv
 from sqlalchemy import (create_engine)
 from sqlalchemy.orm import sessionmaker, scoped_session
-from models.amenity import Amenity
-from models.base_model import Base
-from models.city import City
-from models.place import Place
-from models.review import Review
-from models.state import State
-from models.user import User
+import models
 
 
 database = getenv("HBNB_MYSQL_DB")
@@ -18,8 +12,9 @@ host = getenv("HBNB_MYSQL_HOST")
 password = getenv("HBNB_MYSQL_PWD")
 hbnb_env = getenv("HBNB_ENV")
 
-classes = {"State": State, "City": City, "User": User,
-           "Place": Place, "Review": Review, "Amenity": Amenity}
+classes = {"State": models.State, "City": models.City,
+           "User": models.User, "Place": models.Place,
+           "Review": models.Review, "Amenity": models.Amenity}
 
 
 class DBStorage:
@@ -38,6 +33,7 @@ class DBStorage:
                                       pool_pre_ping=True)
 
         if hbnb_env == 'test':
+            from models.base_model import Base
             Base.metadata.drop_all(self.__engine)
 
     def all(self, cls=None):
@@ -88,6 +84,7 @@ class DBStorage:
         """
         Creating tables in database and curent database sesion.
         """
+        from models.base_model import Base
         Base.metadata.create_all(self.__engine)
         session_factory = sessionmaker(bind=self.__engine,
                                        expire_on_commit=False)
@@ -99,3 +96,4 @@ class DBStorage:
         quitting sesion.
         """
         self.__session.close()
+

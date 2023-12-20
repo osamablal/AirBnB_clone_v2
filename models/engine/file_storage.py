@@ -14,7 +14,7 @@ class FileStorage:
         """
             Going back to the dictinary.
         """
-        fsss_objects = {}
+        fs_objects = {}
         from models.base_model import BaseModel
         from models.user import User
         from models.place import Place
@@ -32,14 +32,14 @@ class FileStorage:
             if isinstance(cls) is str and cls in classes:
                 for key, val in self.__objects.items():
                     if cls == key.split('.')[0]:
-                        fsss_objects[key] = val
+                        fs_objects[key] = val
             elif cls.__name__ in classes:
                 for key, val in self.__objects.items():
                     if cls.__name__ == key.split('.')[0]:
-                        fsss_objects[key] = val
+                        fs_objects[key] = val
         else:
             return self.__objects
-        return fsss_objects
+        return fs_objects
 
     def new(self, obj):
         """

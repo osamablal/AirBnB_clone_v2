@@ -3,18 +3,12 @@
 from os import getenv
 from sqlalchemy import (create_engine)
 from sqlalchemy.orm import sessionmaker, scoped_session
-import models
-
 
 database = getenv("HBNB_MYSQL_DB")
 user = getenv("HBNB_MYSQL_USER")
 host = getenv("HBNB_MYSQL_HOST")
 password = getenv("HBNB_MYSQL_PWD")
 hbnb_env = getenv("HBNB_ENV")
-
-classes = {"State": models.State, "City": models.City,
-           "User": models.User, "Place": models.Place,
-           "Review": models.Review, "Amenity": models.Amenity}
 
 
 class DBStorage:
@@ -41,6 +35,19 @@ class DBStorage:
         Giving back vareity of instence attributes. 
         """
         dbobjects = {}
+        from models.base_model import BaseModel
+        from models.user import User
+        from models.place import Place
+        from models.state import State
+        from models.city import City
+        from models.amenity import Amenity
+        from models.review import Review
+
+        classes = {
+            'BaseModel': BaseModel, 'User': User, 'Place': Place,
+            'State': State, 'City': City, 'Amenity': Amenity,
+            'Review': Review
+        }
         if cls:
             if isinstance(cls) is str and cls in classes:
                 for obj in self.__session.query(classes[cls]).all():

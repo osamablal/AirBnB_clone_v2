@@ -194,7 +194,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
             return
         objects = storage.all(args)
-        print(objects)
+        print(len(objects))
         print("=================================")
         for key, val in objects.items():
             if key.len(args) != 0:

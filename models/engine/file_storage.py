@@ -72,21 +72,18 @@ class FileStorage:
         from models.review import Review
 
         classes = {
-            'BaseModel': BaseModel, 'User': User, 'Place': Place,
-            'State': State, 'City': City, 'Amenity': Amenity,
-            'Review': Review
+            'base_model.BaseModel': BaseModel, 'user.User': User, 'place.Place': Place,
+            'state.State': State, 'city.City': City, 'amenity.Amenity': Amenity,
+            'review.Review': Review
         }
 
         try:
             with open(FileStorage.__file_path, encoding="UTF8") as fd:
                 FileStorage.__objects = json.load(fd)
-            print( FileStorage.__objects.items())
-            print("=========================================")
+ 
             for key, val in FileStorage.__objects.items():
                 class_name = val["__class__"]
-                print(class_name)
-                print("====================================")
-                class_name = classes.get(class_name, None)
+                class_name = classes[class_name]
                 FileStorage.__objects[key] = class_name(**val)
         except FileNotFoundError:
             pass

@@ -47,8 +47,10 @@ class HBNBCommand(cmd.Cmd):
             print('(hbnb) ', end='')
         return stop
 
-    def do_quit(self):
+    def do_quit(self, args):
         """ A Method to exit HBNB console"""
+        print(args)
+        print("===========================")
         return True
 
     def help_quit(self):
@@ -194,7 +196,6 @@ class HBNBCommand(cmd.Cmd):
             return
 
         print(len(objects))
-
 
     def help_count(self):
         """ helping count. """

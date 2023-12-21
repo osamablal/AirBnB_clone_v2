@@ -82,6 +82,8 @@ class FileStorage:
                 FileStorage.__objects = json.load(fd)
             for key, val in FileStorage.__objects.items():
                 class_name = val["__class__"]
+                print(class_name)
+                print("====================================")
                 class_name = classes.get(class_name, class_name.split(".")[1])
                 FileStorage.__objects[key] = class_name(**val)
         except FileNotFoundError:

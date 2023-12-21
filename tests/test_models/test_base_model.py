@@ -36,7 +36,7 @@ class TestBaseModel(unittest.TestCase):
 
     def test_checking_for_docstring_basemodel(self):
         """
-        A check for doc-string.
+		A check for doc-string.
         """
         self.assertIsNotNone(BaseModel.__doc__)
         self.assertIsNotNone(BaseModel.__init__.__doc__)

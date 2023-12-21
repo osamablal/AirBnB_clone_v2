@@ -86,7 +86,7 @@ class FileStorage:
                 class_name = val["__class__"]
                 print(class_name)
                 print("====================================")
-                class_name = classes.get(class_name, class_name.split(".")[1])
+                class_name = classes.get(class_name, None)
                 FileStorage.__objects[key] = class_name(**val)
         except FileNotFoundError:
             pass

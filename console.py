@@ -113,13 +113,9 @@ class HBNBCommand(cmd.Cmd):
         except NameError:
             print("** class doesn't exist **")
             return
-        
-        key = args[1].split('=')[0]
-        print(key)
-        print("================================")
+
+        key = args[0] + "." + args[1]
         try:
-            print(obj_dict)
-            print("=====================================")
             value = obj_dict[key]
             print(value)
         except KeyError:

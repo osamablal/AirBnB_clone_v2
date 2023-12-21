@@ -115,7 +115,11 @@ class HBNBCommand(cmd.Cmd):
             return
         
         key = args[1].split('=')[0]
+        print(key)
+        print("================================")
         try:
+            print(obj_dict)
+            print("=====================================")
             value = obj_dict[key]
             print(value)
         except KeyError:

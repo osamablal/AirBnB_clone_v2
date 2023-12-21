@@ -194,7 +194,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
             return
         for key, val in objects.items():
-            print(args)
+            print(objects)
             print("================================")
             if key.len(args) != 0:
                 if isinstance(val) is eval(args):

@@ -36,7 +36,7 @@ class BaseModel:
     def __str__(self):
     	"""Giving back string rep of an instance"""
     	cls = (str(type(self)).split('.', maxsplit=1)[-1]).split('\'')[0]
-    	return f""
+    	return "{} and {}: {}".format(cls, self.id, self.__dict__)
 
 
     def save(self):

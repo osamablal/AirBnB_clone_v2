@@ -186,16 +186,17 @@ class HBNBCommand(cmd.Cmd):
     def do_count(self, args):
         """Counting num of all class instance. """
         obj_list = []
-        objects = storage.all()
+        
         try:
             if len(args) != 0:
                 eval(args)
         except NameError:
             print("** class doesn't exist **")
             return
+        objects = storage.all(args)
+        print(objects)
+        print("=================================")
         for key, val in objects.items():
-            print(objects)
-            print("================================")
             if key.len(args) != 0:
                 if isinstance(val) is eval(args):
                     obj_list.append(val)

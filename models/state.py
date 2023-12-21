@@ -1,37 +1,32 @@
 #!/usr/bin/python3
-""" City Module for HBNB project """
+""" The state modele of our HBNB project. """
 from os import getenv
-from sqlalchemy import String, Column, ForeignKey
-from sqlalchemy.orm import relationship
-import models
 from models.base_model import BaseModel, Base
-from sqlalchemy import Column, String, ForeignKey
-
-from os import getenv
+from sqlalchemy import Column, String
+from sqlalchemy.orm import relationship
+from models import storage
+from models.city import City
 
 
 class State(BaseModel, Base):
-    """ State class """
+    """ The state class/ """
+    __tablename__ = 'states'
 
-    if getenv("HBNB_TYPE_STORAGE") == "db":
-        __tablename__ = "states"
+    if getenv('HBNB_TYPE_STORAGE') == 'db':
         name = Column(String(128), nullable=False)
-        cities = relationship("City", backref="state", cascade="delete")
-
+        cities = relationship('City', cascade='all, delete', backref='state')
     else:
-        name = ""
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
-    if getenv("HBNB_TYPE_STORAGE") != "db":
         @property
         def cities(self):
-            cit_vals_list = []
-            Cits_dict = models.storage.all('City')
-            for city, value in Cits_dict.items():
-                if self.id == city.state_id:
-                    cit_vals_list.append(value)
-            return cit_vals_list
-#     """ State class """
-#     name = ""
+            '''
+            Giving back the list of City instences
+            with state id similar to currant id.
+            '''
+
+            city_list = []
+            city_dict = storage.all(City)
+
+            for city in city_dict.values():
+                if city.state_id == self.id:
+                    city_list.append(city)
+            return city_list

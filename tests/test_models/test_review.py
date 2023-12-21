@@ -1,29 +1,86 @@
 #!/usr/bin/python3
-""" """
-from tests.test_models.test_base_model import test_basemodel
+"""Testing of the review."""
+import unittest
+import os
 from models.review import Review
+from models.base_model import BaseModel
 
 
-class test_review(test_basemodel):
-    """ """
+class TestReview(unittest.TestCase):
+    """
+    Testing for the review place.
+    """
+    @classmethod
+    def setUpClass(cls):
+        """
+        Preparing for the test.
+        """
+        cls.rev = Review()
+        cls.rev.place_id = "4321-dcba"
+        cls.rev.user_id = "123-bca"
+        cls.rev.text = "The srongest in the Galaxy"
 
-    def __init__(self, *args, **kwargs):
-        """ """
-        super().__init__(*args, **kwargs)
-        self.name = "Review"
-        self.value = Review
+    @classmethod
+    def teardown(cls):
+        """
+        Tearing down finally after the test.
+        """
+        del cls.rev
 
-    def test_place_id(self):
-        """ """
-        new = self.value()
-        self.assertEqual(type(new.place_id), str)
+    def tearDown(self):
+        """
+        The Tear down.
+        """
+        try:
+            os.remove("file.json")
+        except ImportError:
+            pass
 
-    def test_user_id(self):
-        """ """
-        new = self.value()
-        self.assertEqual(type(new.user_id), str)
+    def test_checking_for_docstring_review(self):
+        """
+        A check for doc-string.
+        """
+        self.assertIsNotNone(Review.__doc__)
 
-    def test_text(self):
-        """ """
-        new = self.value()
-        self.assertEqual(type(new.text), str)
+    def test_attributes_review(self):
+        """
+        Testing attrebute of review.
+        """
+        self.assertTrue('id' in self.rev.__dict__)
+        self.assertTrue('created_at' in self.rev.__dict__)
+        self.assertTrue('updated_at' in self.rev.__dict__)
+        self.assertTrue('place_id' in self.rev.__dict__)
+        self.assertTrue('text' in self.rev.__dict__)
+        self.assertTrue('user_id' in self.rev.__dict__)
+
+    def test_is_subclass_review(self):
+        """
+        Testing for review be sub-class base-model.
+        """
+        self.assertTrue(issubclass(self.rev.__class__, BaseModel), True)
+
+    def test_attribute_types_review(self):
+        """
+        Testing review type attrebute.
+        """
+        self.assertEqual(type(self.rev.text), str)
+        self.assertEqual(type(self.rev.place_id), str)
+        self.assertEqual(type(self.rev.user_id), str)
+
+    @unittest.skipIf(os.getenv("HBNB_TYPE_STORAGE") == 'db', 'Not file engine')
+    def test_save_review(self):
+        """
+        Testing for Saving.
+        """
+        self.rev.save()
+        self.assertNotEqual(self.rev.created_at, self.rev.updated_at)
+
+    def test_to_dict_review(self):
+        """
+        Testing for the dictionary.
+        """
+        self.assertEqual('to_dict' in dir(self.rev), True)
+
+
+if __name__ == "__main__":
+    unittest.main()

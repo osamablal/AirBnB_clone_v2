@@ -80,6 +80,8 @@ class FileStorage:
         try:
             with open(FileStorage.__file_path, encoding="UTF8") as fd:
                 FileStorage.__objects = json.load(fd)
+            print( FileStorage.__objects.items())
+            print("=========================================")
             for key, val in FileStorage.__objects.items():
                 class_name = val["__class__"]
                 print(class_name)

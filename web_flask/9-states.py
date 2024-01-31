@@ -7,7 +7,7 @@ from flask import Flask, render_template
 from models import storage
 app = Flask(__name__)
 
-
+# route
 @app.route('/states', strict_slashes=False)
 @app.route('/states/<state_id>', strict_slashes=False)
 def states(state_id=None):
